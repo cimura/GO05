@@ -1,7 +1,5 @@
 package piscine
 
-// import "fmt"
-
 func Len(s string) int {
 	count := 0
 	for range s {
@@ -46,8 +44,3 @@ func ConvertBase(nbr, baseFrom, baseTo string) string {
 	}
 	return Revresult
 }
-
-str := "hello"
-
-str = append(str, str[1:])
-slice[:2]

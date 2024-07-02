@@ -8,23 +8,43 @@ func Len(sRune []rune) int {
 	return count
 }
 
-func Split(s, sep string) []string {
-	var strarray []string
-	sRune := []rune(s)
-	sepRune := []rune(sep)
-	var retRune []rune
-	flag := false
-
-	for indx, sr := range sRune {
-		retRune = append(retRune, sRune)	
-		if sRune[indx] == sepRune[indx] {
-			for _, sp := range sepRune {
-				sRune[indx] = sp
-				indx++
-			}
-		}
-		strarray = append(strarray, string(sRune))
-		sRune = []rune{}
+func sLen(s string) int {
+	count := 0
+	for range s {
+		count++
 	}
-	return strarray
+	return count
+}
+
+func Index(s, Tofind string) int {
+	sRune := []rune(s)
+	Findr := []rune(Tofind)
+	FindLen := Len(Findr)
+
+	for i := range sRune {
+		if i + FindLen > Len(sRune) {
+			return -1
+		}
+		if string(sRune[i : i + FindLen]) == string(Findr) {
+			return i
+		}
+	}
+	return -1
+}
+
+func Split(s, sep string) []string {
+	var strArray []string
+	sepLen := sLen(sep)
+	tmpStr := s
+
+	for {
+		indx := Index(tmpStr, sep)
+		if indx == -1 {
+			strArray = append(strArray, tmpStr)
+			break
+		}
+		strArray = append(strArray, tmpStr[:indx])
+		tmpStr = tmpStr[indx+sepLen:]
+	}
+	return strArray
 }
